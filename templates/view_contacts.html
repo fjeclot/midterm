@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/styles.css')}}"
+    />
+    <title>Contactos</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Contactos Registrados</h1>
+      <table>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Email</th>
+          <th>Fecha de Nacimiento</th>
+          <th>Teléfono</th>
+          <th>Calle</th>
+          <th>Ciudad</th>
+          <th>País</th>
+          <th>Aficiones</th>
+          <th>Acciones</th>
+        </tr>
+        {% for contact in contacts %}
+        <tr>
+          <td>{{ contact['name'] }}</td>
+          <td>{{ contact['last_name'] }}</td>
+          <td>{{ contact['email'] }}</td>
+          <td>{{ contact['birth_date'] }}</td>
+          <td>{{ contact['phone'] }}</td>
+          <td>{{ contact['street'] }}</td>
+          <td>{{ contact['city'] }}</td>
+          <td>{{ contact['country'] }}</td>
+          <td>{{ contact['hobbies'] }}</td>
+          <td>
+            <a href="{{ url_for('update_contact', id=contact['person_id']) }}"
+              >Editar</a
+            >
+            <form
+              action="{{ url_for('delete_contact', id=contact['person_id']) }}"
+              method="POST"
+              style="display: inline"
+            >
+              <button type="submit">Eliminar</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+  </body>
+</html>
